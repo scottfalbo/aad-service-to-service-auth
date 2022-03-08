@@ -8,6 +8,7 @@ namespace AadAuthLocalTests
         [Fact]
         public void Test1()
         {
+            var builder = new ClientBuilder();
 
         }
     }
