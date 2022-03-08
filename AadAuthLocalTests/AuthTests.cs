@@ -1,4 +1,5 @@
 using System;
+using System.Threading.Tasks;
 using Xunit;
 
 namespace AadAuthLocalTests
@@ -6,10 +7,14 @@ namespace AadAuthLocalTests
     public class AuthTests
     {
         [Fact]
-        public void Test1()
+        public async Task CanAuthenticate()
         {
             var builder = new ClientBuilder();
-
+            await builder.GetCertificateAsync("");
+            await builder.GetAccessTokenAsync();
+            var result = await builder.AuthorizeClient();
+            string expected = "OK";
+            Assert.Equal(result.ReasonPhrase, expected);
         }
     }
 }

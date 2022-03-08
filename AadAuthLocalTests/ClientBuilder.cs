@@ -44,7 +44,7 @@ namespace AadAuthLocalTests
 
         }
 
-        public async Task GetCertiaficateAsync(string subject)
+        public async Task GetCertificateAsync(string subject)
         {
             var secretClient = new SecretClient(vaultUri: new Uri(_config.KeyVaultUri),
                 credential: new DefaultAzureCredential());
