@@ -1,4 +1,6 @@
+using AadAuth.Handlers;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -38,7 +40,16 @@ namespace AadAuth
                     };
                 });
 
-            
+            services.AddSingleton<IAuthorizationHandler, ScryForRequirements>();
+
+            services.AddAuthorization(options =>
+            {
+                options.AddPolicy("ValidateTokenPolicy", validateTokenPolicy =>
+                {
+                    validateTokenPolicy.Requirements.Add(new Requirements());
+                    validateTokenPolicy.RequireClaim("appidacr", "2");
+                });
+            });
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
