@@ -38,6 +38,8 @@ namespace AadAuth
                     };
                 });
 
+            
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
